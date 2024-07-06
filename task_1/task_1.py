@@ -2,7 +2,7 @@ from pathlib import Path
 from colorama import Fore, Style
 
 
-def total_salary(path: Path = Path('data/employee_salary.txt')) -> tuple[float, float]:
+def total_salary(path: Path = Path('../data/employee_salary.txt')) -> tuple[float, float]:
     """
     :param path: path to employee salary file
     :return: sum of salary and mean salary
@@ -20,8 +20,8 @@ def total_salary(path: Path = Path('data/employee_salary.txt')) -> tuple[float, 
     return _sum, _mean
 
 
-if __name__ == '__main__':
-    filepath = Path("data/employee_salary.txt")
+def main():
+    filepath = Path("../data/employee_salary.txt")
     try:
         salary_sum, salary_mean = total_salary(filepath)
         print(f"Sum of salary: {Fore.GREEN} {salary_sum} {Style.RESET_ALL}USD")
@@ -30,3 +30,5 @@ if __name__ == '__main__':
         print(f"Path \"{filepath}\" not found")
 
 
+if __name__ == '__main__':
+    main()
