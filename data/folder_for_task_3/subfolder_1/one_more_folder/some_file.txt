@@ -1,0 +1,26 @@
+structure = {
+    'main_folder':
+        [
+            {'subfolder_1':
+                [
+                    {'one_more_folder': ['some_file.txt']},
+                    'file_11.txt',
+                    'file_12.txt',
+                ]
+            },
+            {'subfolder_2':
+                [
+                    'file_21.txt',
+                    'file_22.txt',
+                    'file_23.txt',
+                ]
+            },
+            {'subfolder_3':
+                [
+                    'file_31.txt',
+                    'file_32.txt',
+                    'file_33.txt',
+                ]
+            }
+        ]
+}
