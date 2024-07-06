@@ -22,52 +22,40 @@ def normalize_phone(phone_number: str) -> str:
 
 
 def bot_answer(msg: str) -> None:
-    print(f"{Fore.CYAN}bot: {Fore.GREEN}{msg}")
+    print(f"{Fore.BLUE}bot: {Fore.CYAN}{msg}")
 
 
-def add_contact(phone_book: dict[str: str], *args: list[str]) -> None:
-    if len(args) != 2:
-        bot_answer('If you want to add a contact you should ask for "add <name> <number>"')
+def add_contact(phone_book: dict[str: str], *args: str) -> None:
+    name = args[0]
+    phone = normalize_phone(args[1])
+    if phone:
+        phone_book.update({name: phone})
+        bot_answer('Contact added.')
     else:
-        name = args[0]
-        phone = normalize_phone(args[1])
-        if phone:
-            phone_book.update({name: phone})
-            bot_answer('Contact added.')
-        else:
-            bot_answer('Invalid phone number.')
+        bot_answer('Invalid phone number.')
 
 
-def change_contact(phone_book: dict[str: str], *args: list[str]) -> None:
-    if len(args) != 2:
-        bot_answer('If you want to change a contact you should ask for "change <name> <number>"')
+def change_contact(phone_book: dict[str: str], *args: str) -> None:
+    name = args[0]
+    phone = normalize_phone(args[1])
+    if phone:
+        phone_book[name] = phone
+        bot_answer('Contact updated.')
     else:
-        name = args[0]
-        phone = normalize_phone(args[1])
-        if phone:
-            phone_book[name] = phone
-            bot_answer('Contact updated.')
-        else:
-            bot_answer('Invalid phone number.')
+        bot_answer('Invalid phone number.')
 
 
-def show_contact(phone_book: dict[str: str], *args: list[str]) -> None:
-    if len(args) != 1:
-        bot_answer('If you want to see the number of a contact you must ask for "phone <name>"')
+def show_contact(phone_book: dict[str: str], *args: str) -> None:
+    name = args[0]
+    if name not in phone_book:
+        bot_answer('No contact with that name')
     else:
-        name = args[0]
-        if name not in phone_book:
-            bot_answer('No contact with that name')
-        else:
-            bot_answer(f"{name}: {phone_book[name]}")
+        bot_answer(f"{name}: {phone_book[name]}")
 
 
 def show_all(phone_book: dict[str: str]) -> None:
-    if len(phone_book) == 0:
-        bot_answer('Your phone book is empty')
-    else:
-        for key, item in phone_book.items():
-            bot_answer(f"{key}: {item}")
+    for key, item in phone_book.items():
+        bot_answer(f"{key}: {item}")
 
 
 def show_info() -> None:
