@@ -1,6 +1,9 @@
 import sys
 from pathlib import Path
-from colorama import Fore, Style
+from colorama import Fore, init
+init(autoreset=True)
+
+SPACE = "  "
 
 
 def get_directory_structure(path: Path) -> dict[str: list[dict | str]]:
@@ -30,12 +33,12 @@ def show_directory_structure(directory_structure: dict[str: list[dict | str]], l
     Display the folder structure
     """
     for key, value in directory_structure.items():
-        print(f"{"\t" * level}|- {Fore.BLUE}{key}{Style.RESET_ALL}")
+        print(f"{SPACE * level}|- {Fore.BLUE}{key}")
         for item in value:
             if type(item) is dict:
                 show_directory_structure(item, level + 1)
             else:
-                print(f"{"\t" * (level + 1)}|- {Fore.GREEN}{item}{Style.RESET_ALL}")
+                print(f"{SPACE * (level + 1)}|- {Fore.GREEN}{item}")
 
 
 def main():
