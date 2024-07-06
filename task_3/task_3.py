@@ -3,9 +3,14 @@ from pathlib import Path
 from colorama import Fore, Style
 
 
-def get_directory_structure(path: Path) -> dict[str: list[str]]:
+def get_directory_structure(path: Path) -> dict[str: list[dict | str]]:
+    """
+    :param path: path to folder
+    :return: structure like dictionary with list
+    """
     directory_structure = dict()
     file_list = list()
+
     if path.is_dir():
         for entry in path.iterdir():
             if entry.is_file():
@@ -17,11 +22,16 @@ def get_directory_structure(path: Path) -> dict[str: list[str]]:
     return directory_structure
 
 
-def show_directory_structure(directory_structure: dict[str: list[str]], level: int = 0) -> None:
+def show_directory_structure(directory_structure: dict[str: list[dict | str]], level: int = 0) -> None:
+    """
+    :param directory_structure: dict with folder structure
+    :param level: depth level
+
+    Display the folder structure
+    """
     for key, value in directory_structure.items():
         print(f"{"\t" * level}|- {Fore.BLUE}{key}{Style.RESET_ALL}")
         for item in value:
-            # print('*************DEUBUG*************' ,item)
             if type(item) is dict:
                 show_directory_structure(item, level + 1)
             else:
@@ -44,5 +54,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # sys.argv = ['.\\task_3.py', '../data/folder_for_task_3']
     main()
